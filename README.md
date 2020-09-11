@@ -395,4 +395,4 @@ Contents of section .comment:
 虚函数的地址为400aea:.text代码段
 综上所述： C++中虚函数表位于只读数据段（.rodata），也就是C++内存模型中的常量区；而虚函数则位于代码段（.text），也就是C++内存模型中的代码区。如下图
 
-![image_text](https://github.com/lizhicun/virtual/blob/master/src/10.jpg)
+![image_text](https://github.com/lizhicun/virtual/blob/master/src/10.png)
