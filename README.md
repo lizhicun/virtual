@@ -60,13 +60,14 @@ int Max(int x, int y)  //定义Max函数
 ```
 
 回到第一个例子，对(int*)*(int*)*(int*)(&b)进行分析一下：对&b强转为int*得到了b的内存首地址，然后(int*)*是对此地址取值再强转得到虚函数表的首地址，后面再一次取值强转就得到了一个虚函数的地址指针
-[图1]
+![image_text](https://github.com/lizhicun/virtual/blob/master/src/1.jpg)
 
 ### 一般继承（无虚函数覆盖）
-[继承关系的图]
+![image_text](https://github.com/lizhicun/virtual/blob/master/src/2.jpg)
 
 对于实例：Derive d; 它所指向的虚函数表如下
-[图]
+
+![image_text](https://github.com/lizhicun/virtual/blob/master/src/3.jpg)
 
 可以看到：
 * 虚函数按照其声明顺序放于表中
@@ -75,7 +76,7 @@ int Max(int x, int y)  //定义Max函数
 举个栗子
 
 ### 一般继承（有虚函数覆盖）
-[图]
+![image_text](https://github.com/lizhicun/virtual/blob/master/src/4.jpg)
 
 可以看到:
 * 覆盖的f()函数被放到了虚表中原来父类虚函数的位置
@@ -86,20 +87,22 @@ int Max(int x, int y)  //定义Max函数
 Base *b = new Derive();
 b->f(); 
 ```
-
+![image_text](https://github.com/lizhicun/virtual/blob/master/src/5.jpg)
 ### 多继承（无虚函数覆盖）
-[图]
+![image_text](https://github.com/lizhicun/virtual/blob/master/src/6.jpg)
+
 子类的虚函数表，是下面这个样子
-[图]
+![image_text](https://github.com/lizhicun/virtual/blob/master/src/7.jpg)
+
 可以看到：
 * 每个父类都有自己的虚表
 * 子类的成员函数被放到了第一个父类的表中。（所谓的第一个父类是按照声明顺序来判断的）
 这样做就是为了解决不同的父类类型的指针指向同一个子类实例，而能够调用到实际的函数。
 
 ### 多继承（有虚函数覆盖）
-[图]
+![image_text](https://github.com/lizhicun/virtual/blob/master/src/8.jpg)
 子类的虚函数表，是下面这个样子
-[图]
+![image_text](https://github.com/lizhicun/virtual/blob/master/src/9.jpg)
 我们可以看见，三个父类虚函数表中的f()的位置被替换成了子类的函数指针.
 举个栗子
 
@@ -387,4 +390,4 @@ Contents of section .comment:
 得到虚函数表的地址为400be0:在.rodata这个段
 虚函数的地址为400aea:.text代码段
 综上所述： C++中虚函数表位于只读数据段（.rodata），也就是C++内存模型中的常量区；而虚函数则位于代码段（.text），也就是C++内存模型中的代码区。如下图
-图[https://www.cnblogs.com/senior-engineer/p/7832915.html]
+![image_text](https://github.com/lizhicun/virtual/blob/master/src/10.jpg)
